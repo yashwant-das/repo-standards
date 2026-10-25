@@ -3,6 +3,22 @@
 Required checks and workflow safety for repositories that follow these
 standards.
 
+```mermaid
+flowchart LR
+    subgraph Local["Developer Workstation"]
+        Edit["Code & Docs Edit"] --> PreCommit["pre-commit Gates\n(Staged Files Only)\n• markdownlint-cli2\n• Ruff / Linter & Formatter\n• YAML/JSON & Whitespace"]
+    end
+
+    subgraph GitHub["GitHub Actions (SHA-Pinned Workflows)"]
+        PR["Pull Request\n(contents: read)"] --> Lint["Full Repo Lint & Type Check"]
+        PR --> Unit["Unit & Offline Smoke Tests"]
+        PR --> Integration["Controlled Integration Gates"]
+        Lint & Unit & Integration --> Merge["Branch Protection\nRequired Checks Pass"]
+    end
+
+    PreCommit ==> PR
+```
+
 ## PR check baselines
 
 Apply the [scope](../README.md#scope) and [definitions](../README.md#definitions).
@@ -27,8 +43,9 @@ do not replace them.
 Include Markdown linting on documentation-only PRs in software repositories.
 Tests must exercise behavior; document unavailable or inapplicable checks.
 
-Document check scope in the development guide or small-project README. Agent-driven
-projects may use collection as an exception; it proves discovery, not execution.
+Document check scope in `docs/development.md` or a `small` project's `README.md`.
+Agent-driven projects may use collection as an exception; it proves discovery, not
+execution.
 
 ## Pre-commit gates
 
