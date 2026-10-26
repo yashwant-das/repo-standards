@@ -108,7 +108,8 @@ flowchart LR
 ```
 
 1. **Title, opening summary, badges and visual preview:**
-   - Start with `# <repo-name>`, a concise paragraph explaining what the project
+   - Start with one H1: either `# <repo-name>` or a meaningful title that reflects
+     the project. Follow it with a concise paragraph explaining what the project
      does and its scope boundaries, and a row of [Shields.io](https://shields.io/)
      badges: CI workflow status, live report badge (such as Allure on GitHub
      Pages when published), License, primary language/runtime and 1–3 core tools.
